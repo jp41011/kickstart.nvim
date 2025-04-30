@@ -103,7 +103,7 @@ vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
 vim.opt.relativenumber = true
-vim.opt.colorcolumn = '80,90'
+vim.opt.colorcolumn = '80,100'
 -- hl-ColorColumn
 
 -- Enable mouse mode, can be useful for resizing splits for example!
