@@ -103,7 +103,7 @@ vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
 vim.opt.relativenumber = true
-vim.opt.colorcolumn = '80,100'
+vim.opt.colorcolumn = '50,80'
 -- hl-ColorColumn
 vim.opt.tabstop = 4
 --vim.opt.softtabstop = 4
@@ -121,6 +121,7 @@ vim.opt.showmode = false
 --  See `:help 'clipboard'`
 vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
+  --set clipboard+=unnamedplus
 end)
 
 -- Enable break indent
@@ -216,7 +217,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function()
-    vim.highlight.on_yank()
+    vim.highlight.on_yank() --TODO: swap vim.highlight with vim.hl
   end,
 })
 
