@@ -120,6 +120,7 @@ vim.opt.showmode = false
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.schedule(function()
+  -- on wayland this requires sudo apt install wl-clipboard
   vim.opt.clipboard = 'unnamedplus'
   --set clipboard+=unnamedplus
 end)
