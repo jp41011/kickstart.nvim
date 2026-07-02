@@ -93,6 +93,18 @@ vim.g.maplocalleader = ' '
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
+-- Prefer Neovim's bundled Lua parser over stale nvim-treesitter parser installs.
+do
+  local data_path = vim.fs.normalize(vim.fn.stdpath 'data')
+  local lua_parser = vim.tbl_filter(function(parser)
+    return not vim.startswith(vim.fs.normalize(parser), data_path)
+  end, vim.api.nvim_get_runtime_file('parser/lua.*', true))[1]
+
+  if lua_parser and vim.treesitter and vim.treesitter.language and vim.treesitter.language.add then
+    vim.treesitter.language.add('lua', { path = lua_parser })
+  end
+end
+
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
@@ -951,7 +963,7 @@ require('lazy').setup({
       require('nvim-treesitter').setup()
 
       -- 2. Keep your language parser list intact
-      require('nvim-treesitter').install {
+      local ensure_installed = {
         'bash',
         'c',
         'diff',
@@ -964,6 +976,14 @@ require('lazy').setup({
         'vim',
         'vimdoc',
       }
+
+      local missing = vim.tbl_filter(function(lang)
+        return #vim.api.nvim_get_runtime_file('parser/' .. lang .. '.*', true) == 0
+      end, ensure_installed)
+
+      if #missing > 0 then
+        require('nvim-treesitter').install(missing)
+      end
 
       -- 3. Enable standard highlighting and conditional indentation
       vim.api.nvim_create_autocmd('FileType', {
