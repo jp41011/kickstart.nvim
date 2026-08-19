@@ -963,6 +963,8 @@ require('lazy').setup({
         'query',
         'vim',
         'vimdoc',
+        'json',
+        'jsonc',
       }
 
       -- 3. Enable standard highlighting and conditional indentation
