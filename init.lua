@@ -964,7 +964,9 @@ require('lazy').setup({
         'vim',
         'vimdoc',
         'json',
-        'jsonc',
+        'git_config',
+        'git_rebase',
+        'gitcommit',
       }
 
       -- 3. Enable standard highlighting and conditional indentation
