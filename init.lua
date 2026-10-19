@@ -93,6 +93,11 @@ vim.g.maplocalleader = ' '
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
+-- Keep the Windows curl revocation workaround scoped to Neovim's child processes.
+if vim.fn.has 'win32' == 1 then
+  vim.env.CURL_HOME = vim.fn.stdpath 'config' .. '/curl'
+end
+
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
